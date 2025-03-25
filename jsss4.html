@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Symmetric Matrix</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .matrix-input {
+            margin-bottom: 20px;
+        }
+        .matrix-input input {
+            width: 50px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Check if a Matrix is Symmetric</h1>
+
+    <div class="matrix-input">
+        <label for="size">Enter the size of the matrix (n x n):</label>
+        <input type="number" id="size" min="1" value="2">
+        <button onclick="createMatrixInputs()">Create Matrix</button>
+    </div>
+
+    <div id="matrixContainer"></div>
+
+    <button onclick="checkSymmetric()">Check Symmetric</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function createMatrixInputs() {
+            const size = parseInt(document.getElementById("size").value);
+            const container = document.getElementById("matrixContainer");
+            container.innerHTML = ""; // Clear previous inputs
+
+            // Create input fields for the matrix
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    const input = document.createElement("input");
+                    input.type = "number";
+                    input.id = `cell-${i}-${j}`;
+                    input.placeholder = `Row ${i + 1}, Col ${j + 1}`;
+                    container.appendChild(input);
+                }
+                container.appendChild(document.createElement("br")); // New line after each row
+            }
+        }
+
+        function checkSymmetric() {
+            const size = parseInt(document.getElementById("size").value);
+            const matrix = [];
+
+            // Read the matrix values
+            for (let i = 0; i < size; i++) {
+                matrix[i] = [];
+                for (let j = 0; j < size; j++) {
+                    const value = parseFloat(document.getElementById(`cell-${i}-${j}`).value);
+                    matrix[i][j] = value;
+                }
+            }
+
+            // Check if the matrix is symmetric
+            let isSymmetric = true;
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if (matrix[i][j] !== matrix[j][i]) {
+                        isSymmetric = false;
+                        break;
+                    }
+                }
+                if (!isSymmetric) break;
+            }
+
+            // Display the result
+            const resultDiv = document.getElementById("result");
+            if (isSymmetric) {
+                resultDiv.textContent = "The matrix is symmetric.";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.textContent = "The matrix is not symmetric.";
+                resultDiv.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
