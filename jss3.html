@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Content on Hover</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #content {
+            margin-top: 50px;
+            padding: 20px;
+            display: inline-block;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+        img {
+            max-width: 500px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Is it rainingg!!!</h1>
+    <div id="content">ohh what a rain!</div>
+    <img id="image" src="" alt="New Image">
+    
+    <script>
+        const content = document.getElementById("content");
+        const image = document.getElementById("image");
+
+        content.addEventListener("mouseover", function() {
+            content.innerText = "oh what a rain!";
+            image.src = "rainy.jpg"; // Replace with actual image URL
+            image.style.display = "block";
+        });
+        
+        content.addEventListener("mouseout", function() {
+            content.innerText = "Hover over me!";
+            image.style.display = "none";
+        });
+    </script>
+</body>
+</html>
